@@ -1,0 +1,14 @@
+.Board {
+    display: flex;
+    background-color: hsla(220, 13%, 18%, 0.70);
+    width: 90vw;
+    height: 70vh;
+}
+
+@media only screen and (min-width: 768px) {
+    /* For desktop: */
+    .Board {
+        width: 48vw;
+        height: 85vh;
+    }
+}

@@ -10,10 +10,12 @@
     "@types/node": "^12.12.37",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.6",
+    "rasa-webchat": "0.8.8",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "typestate": "^1.0.6"
   },
   "scripts": {
     "start": "react-scripts start",

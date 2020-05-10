@@ -1,24 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+import Chat  from './chat_view/Chat';
+import Board  from './board_view/Board';
 
 function App() {
   return (
     <div className="App">
+      {/* header with menu and logo */}
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+        <span role="img" aria-label="logo">🤵</span> Hello Save
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+
+      <section className="App-main">
+        <Chat />
+        <Board />
+      </section>
+
     </div>
   );
 }
