@@ -4,17 +4,17 @@ import { ActionTags } from './bot_tags_parser';
 
 // All states that defines the current state of the chat bot
 export enum SaveState {
-  Idle_NewComer, // first time access, no wallet
+  Idle, // first time access, no wallet
   WalletCreation
 }
 
 // the Save service implements a state machine
 export class SaveStateService {
   // private state machine
-  private readonly stateMachine =new TypeState.FiniteStateMachine<SaveState>(SaveState.Idle_NewComer);
+  private readonly stateMachine =new TypeState.FiniteStateMachine<SaveState>(SaveState.Idle);
 
   // components can observe current state
-  readonly currentState = new Observable(SaveState.Idle_NewComer);
+  readonly currentState = new Observable(SaveState.Idle);
 
   constructor() {
     // setup state machine transitions
@@ -23,7 +23,18 @@ export class SaveStateService {
 
   // setups the possible transitions
   setupTransitions() {
-    this.stateMachine.from(SaveState.Idle_NewComer).to(SaveState.WalletCreation);
+    this.stateMachine.from(SaveState.Idle).to(SaveState.WalletCreation);
+    this.stateMachine.from(SaveState.WalletCreation).to(SaveState.Idle);
+  }
+
+  // for board
+  shouldBoardBeOpen(): boolean {
+    return this.currentState.get() !== SaveState.Idle
+  }
+
+  // back to idle
+  backToIdle() {
+    this.newState(SaveState.Idle);
   }
 
   // a bot tag was detected, check for action

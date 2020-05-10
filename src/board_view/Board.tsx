@@ -3,15 +3,35 @@ import './Board.css';
 
 import { SaveState } from '../lib/save_state.service'
 import { useObservable } from '../lib/observableHook';
-import { saveStateService } from '../lib/services';
+import { saveStateService, portisService } from '../lib/services';
 
-// sub component for portix
-function PortixView() {
-  return <h1>Wallet Creation</h1>;
+// sub component for portis
+function PortisView() {
+  // open portis
+  portisService.open();
+  
+  return (
+    <div className="BoardInner">
+      { BoardHeader("Wallet with Portis™") }
+    </div>
+  );
 }
 
 function Default() {
-  return <h1>Board</h1>;
+  return (
+    <div className="BoardInner">
+      { BoardHeader("Board") }
+    </div>
+  );
+}
+
+function BoardHeader(title: string) {
+  return (
+    <div className="BoardHeader">
+      <h1 className="BoardTitle">{title}</h1>
+      <span className="BoardCancel" onClick={() => saveStateService.backToIdle()}>×</span>
+    </div>
+  );
 }
 
 function Board() {
@@ -19,8 +39,8 @@ function Board() {
   const currentSaveState = useObservable(saveStateService.currentState);
 
   return (
-    <div className="Board">
-      { currentSaveState === SaveState.WalletCreation ? PortixView() : Default() }
+    <div className={saveStateService.shouldBoardBeOpen() ? 'Board visible' : 'Board'}>
+      {currentSaveState === SaveState.WalletCreation ? PortisView() : Default()}
     </div>
   );
 }
