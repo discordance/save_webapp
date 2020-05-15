@@ -5,18 +5,28 @@ import './Chat.css';
 import { TagParser } from '../lib/bot_tags_parser'
 
 // state service
-import { saveStateService } from "../lib/services";
+import { saveStateService, chatService } from "../lib/services";
 
 import { Widget } from 'rasa-webchat';
 
 function Chat() {
+  // create a ref
+  const chatEl = React.useRef();
+
+  // on mount update the ref
+  React.useEffect(() => {
+    chatService.attachChatWidgetRef(chatEl);
+  });
+
+  // the component
   return (
     <div className="Chat">
       <Widget
+        ref={chatEl} // ref for further hacky stuff
         initPayload={"hello"}
         socketUrl={"https://bot-ws.transversal.tech"}
         socketPath={"/socket.io/"}
-        customData={{"language": "en"}} // arbitrary custom data. Stay minimal as this will be added to the socket
+        customData={{ "language": "en" }}
         title={"SaveBot"}
         hideWhenNotConnected={false}
         embedded={true}
@@ -30,12 +40,12 @@ function Chat() {
             const tag = TagParser.parseTagInUtterance(utter.text);
 
             // action
-            if(tag) {
+            if (tag) {
               saveStateService.checkAction(tag);
             }
           },
-          'connect': () => {},
-          'disconnect': () => {},
+          'connect': () => { },
+          'disconnect': () => { },
         }}
       />
     </div>

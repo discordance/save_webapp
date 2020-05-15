@@ -24,10 +24,9 @@ go into `/root/botfront` then
  
 `docker-compose up -d`
 
-
 ### send build to server
 
-`scp -r build root@145.14.157.41:/root/app_build`
+`scp -r build/* root@145.14.157.41:/root/app_build`
 
 ### https proxy
 

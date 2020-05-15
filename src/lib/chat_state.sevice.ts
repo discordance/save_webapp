@@ -1,3 +1,50 @@
+import React from 'react';
+import { Widget } from 'rasa-webchat';
+
+export class ChatService {
+  // get the chat widget ref
+  private chatWidgetRef : React.MutableRefObject<Widget> | null = null;
+
+  // map the chat storage
+  private chatStorage: ChatStorage | null = null;
+
+  constructor() {
+    this.updateFromCache();
+  }
+
+  // attach chatWidgetRef
+  attachChatWidgetRef(ref: React.MutableRefObject<Widget>) {
+    this.chatWidgetRef = ref;
+  }
+
+  // clear chat
+  clearChat() {
+    if (this.chatStorage) {
+      this.chatStorage.conversation = [];
+      this.saveToCache();
+      const widget : Widget = this.chatWidgetRef?.current;
+      widget.forceInit();
+    }
+  }
+
+  // read the local storage
+  private updateFromCache() {
+    let chatStorage = localStorage.getItem('chat_session');
+    if (chatStorage) {
+      const parsed = JSON.parse(chatStorage);
+      this.chatStorage = parsed;
+    }
+  }
+
+  // save chat state to cache
+  private saveToCache() {
+    if (this.chatStorage) {
+      localStorage.setItem('chat_session', JSON.stringify(this.chatStorage));
+    }
+  }
+}
+
+
 // data structure that maps the local storage chat state
 export interface ChatStorage {
   params: Params;

@@ -1,26 +1,15 @@
 import React from 'react';
 import './Board.css';
 
+// import Typing from 'react-typing-animation';
 import { SaveState } from '../lib/save_state.service'
 import { useObservable } from '../lib/observableHook';
-import { saveStateService, portisService } from '../lib/services';
-
-// sub component for portis
-function PortisView() {
-  // open portis
-  portisService.open();
-  
-  return (
-    <div className="BoardInner">
-      { BoardHeader("Wallet with Portis™") }
-    </div>
-  );
-}
+import { saveStateService } from '../lib/services';
 
 function Default() {
   return (
     <div className="BoardInner">
-      { BoardHeader("Board") }
+      {BoardHeader("Board")}
     </div>
   );
 }
@@ -40,7 +29,8 @@ function Board() {
 
   return (
     <div className={saveStateService.shouldBoardBeOpen() ? 'Board visible' : 'Board'}>
-      {currentSaveState === SaveState.WalletCreation ? PortisView() : Default()}
+      {Default()}
+      {/* {currentSaveState === SaveState.WalletCreation ? PortisView() : Default()} */}
     </div>
   );
 }

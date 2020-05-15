@@ -42,3 +42,13 @@
 .BoardTitle {
     margin: 0 0 0 20px;
 }
+
+.BoardInner{
+    display: flex;
+    flex-direction: column;
+}
+
+.BoardText{
+    color: white;
+    padding: 20px;
+}
