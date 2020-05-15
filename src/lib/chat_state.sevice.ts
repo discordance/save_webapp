@@ -10,6 +10,11 @@ export class ChatService {
 
   constructor() {
     this.updateFromCache();
+
+    // cleaner
+    setInterval(()=> {
+      this.stripActionTags();
+    }, 200);
   }
 
   // attach chatWidgetRef
@@ -21,6 +26,30 @@ export class ChatService {
   clearChat() {
     if (this.chatStorage) {
       this.chatStorage.conversation = [];
+      this.saveToCache();
+      const widget : Widget = this.chatWidgetRef?.current;
+      widget.forceInit();
+    }
+  }
+
+  // strip action tags
+  stripActionTags() {
+    this.updateFromCache();
+    if (this.chatStorage) {
+      let updated = false;
+      const newConv = this.chatStorage.conversation.map((m) => {
+        if(m.text) {
+          if(m.text.match(/<([a-z_]+)>/)){
+            updated = true;
+            m.text = m.text.replace(/<([a-z_]+)>/, '');
+          }
+        }
+        return m;
+      });
+      if(!updated){
+        return;
+      }
+      this.chatStorage.conversation = newConv;
       this.saveToCache();
       const widget : Widget = this.chatWidgetRef?.current;
       widget.forceInit();
