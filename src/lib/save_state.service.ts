@@ -48,8 +48,11 @@ export class SaveStateService {
         chatService.clearChat();
         return;
       case (ActionTags.WalletCheck):
-        metamaskService.checkWallet();
-        return;        
+        metamaskService.checkWalletAvailable();
+        return;  
+      case (ActionTags.WalletConnect):
+        metamaskService.askForConnection();
+        return;                
       default:
         return;  
     }

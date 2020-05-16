@@ -1,8 +1,6 @@
 import React from 'react';
 import './Board.css';
 
-// import Typing from 'react-typing-animation';
-import { SaveState } from '../lib/save_state.service'
 import { useObservable } from '../lib/observableHook';
 import { saveStateService } from '../lib/services';
 

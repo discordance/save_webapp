@@ -2,7 +2,8 @@
 export enum ActionTags {
   WalletCreate = 'wallet_create',
   ClearChat = 'clear_chat',
-  WalletCheck = 'wallet_check'
+  WalletCheck = 'wallet_check',
+  WalletConnect = 'wallet_connect'
 }
 
 

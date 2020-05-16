@@ -26,7 +26,7 @@ go into `/root/botfront` then
 
 ### send build to server
 
-`scp -r build/* root@145.14.157.41:/root/app_build`
+`npm run build && scp -r build/* root@145.14.157.41:/root/app_build`
 
 ### https proxy
 
