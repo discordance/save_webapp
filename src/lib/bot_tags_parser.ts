@@ -1,7 +1,8 @@
 // all available tag types
 export enum ActionTags {
   WalletCreate = 'wallet_create',
-  ClearChat = 'clear_chat'
+  ClearChat = 'clear_chat',
+  WalletCheck = 'wallet_check'
 }
 
 

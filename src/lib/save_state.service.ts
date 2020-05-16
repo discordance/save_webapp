@@ -1,7 +1,7 @@
 import { TypeState } from 'typestate';
 import { Observable } from './observable';
 import { ActionTags } from './bot_tags_parser';
-import { chatService } from './services';
+import { chatService, metamaskService } from './services';
 
 // All states that defines the current state of the chat bot
 export enum SaveState {
@@ -47,6 +47,9 @@ export class SaveStateService {
       case (ActionTags.ClearChat):
         chatService.clearChat();
         return;
+      case (ActionTags.WalletCheck):
+        metamaskService.checkWallet();
+        return;        
       default:
         return;  
     }

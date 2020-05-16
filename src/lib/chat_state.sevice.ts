@@ -22,6 +22,18 @@ export class ChatService {
     this.chatWidgetRef = ref;
   }
 
+  // sends a payload to the server
+  sendPayload(pl) {
+    const widget : Widget = this.chatWidgetRef?.current;
+    widget.sendMessage(pl);
+  }
+
+  // adds a fake message as if it was from the bot
+  addBotMessage(message) {
+    const widget : Widget = this.chatWidgetRef?.current;
+    widget.addMessage(message);
+  }
+
   // clear chat
   clearChat() {
     if (this.chatStorage) {
