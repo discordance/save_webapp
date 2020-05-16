@@ -11,7 +11,7 @@ function WalletView() {
         metamaskService.updateWalletAccounts();
     });
 
-    return <span className="Wallet-Adress">🔒{currentAccount}</span>
+    return <span className="Wallet-Adress">🔒 {currentAccount}</span>
 }
 
 export default WalletView;

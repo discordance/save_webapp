@@ -2,7 +2,7 @@
     display: flex;
     background-color: hsla(220, 13%, 18%, 0.95);
     width: 90vw;
-    height: 10vh;
+    height: 85vh;
 }
 
 @media only screen and (min-width: 768px) {

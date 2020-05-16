@@ -16,7 +16,6 @@ function Chat() {
   // on mount update the ref
   React.useEffect(() => {
     chatService.attachChatWidgetRef(chatEl);
-    console.log('FUCK');
   });
 
   // the component

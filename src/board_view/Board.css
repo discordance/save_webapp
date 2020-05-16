@@ -3,7 +3,7 @@
     flex-direction: column;
     background-color: hsla(220, 13%, 18%, 0.70);
     width: 90vw;
-    height: 70vh;
+    height: 0vh;
 }
 
 @media only screen and (min-width: 768px) {
