@@ -1,17 +1,20 @@
 import React from 'react';
 
-import { metamaskService } from './lib/services';
+import { web3WalletService } from './lib/services';
 import { useObservable } from './lib/observableHook';
 
 function WalletView() {
     // current account
-    const currentAccount = useObservable(metamaskService.currentAccount);
+    const currentAccount = useObservable(web3WalletService.currentAccount);
 
     React.useEffect(() => {
-        metamaskService.updateWalletAccounts();
+        web3WalletService.updateWalletAccounts();
     });
 
-    return <span className="Wallet-Adress">🔒 {currentAccount}</span>
+    if (currentAccount !== '') {
+        return <span className="Wallet-Adress">🔒 {currentAccount}</span>
+    }
+    return <span className="Wallet-Adress"></span>
 }
 
 export default WalletView;

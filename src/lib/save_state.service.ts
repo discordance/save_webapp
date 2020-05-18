@@ -1,7 +1,7 @@
 import { TypeState } from 'typestate';
 import { Observable } from './observable';
 import { ActionTags } from './bot_tags_parser';
-import { chatService, metamaskService } from './services';
+import { chatService, web3WalletService } from './services';
 
 // All states that defines the current state of the chat bot
 export enum SaveState {
@@ -48,10 +48,10 @@ export class SaveStateService {
         chatService.clearChat();
         return;
       case (ActionTags.WalletCheck):
-        metamaskService.checkWalletAvailable();
+        web3WalletService.checkWalletAvailable();
         return;  
       case (ActionTags.WalletConnect):
-        metamaskService.askForConnection();
+        web3WalletService.askForConnection();
         return;                
       default:
         return;  

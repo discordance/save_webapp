@@ -2,10 +2,10 @@ import Web3 from 'web3';
 import { chatService } from './services';
 import { Observable } from './observable';
 
-// Portis Service
-export class MetamaskService {
+// Web3 Wallet Service
+export class Web3WalletService {
     private web3: Web3 | null = null;
-    private injectedMetamask;
+    private injectedWallet;
 
     // components can observe account
     readonly currentAccount: Observable<string> = new Observable("");
@@ -34,31 +34,31 @@ export class MetamaskService {
     checkWalletAvailable() {
         if (this.walletDetection()) {
             // tell user
-            chatService.sendPayload('/save.metamask_available');
+            chatService.sendPayload('/save.wallet_available');
         } else {
-            chatService.addBotMessage({ text: 'No wallet detected :(' });
-            chatService.addBotMessage({ text: 'Looks like you need one !' });
+            // @TODO send a payload
+            chatService.sendPayload('/save.wallet_unavailable');
         }
     }
 
     async askForConnection() {
-        if (this.injectedMetamask) {
+        if (this.injectedWallet) {
             try {
-                await this.injectedMetamask.enable();
-                chatService.addBotMessage({ text: 'Good ! We can now resume our fantastic journey 💪' })
+                await this.injectedWallet.enable();
+                chatService.addBotMessage({ text: 'Good ! We can now resume our fantastic journey 💪' });
                 await this.checkWalletAccounts();
             } catch (error) {
-                console.log('refused to authorize meta mask');
+                console.log('refused to authorize');
                 chatService.addBotMessage({ text: 'You refused the connection.' });
-                chatService.addBotMessage({ text: 'No worries, I am perfectly safe 🏦' })
+                chatService.addBotMessage({ text: 'No worries, I am perfectly safe 🏦' });
             }
         }
     }
 
     private walletDetection(): boolean {
-        if ((<any>window).ethereum && (<any>window).ethereum.isMetaMask) {
+        if ((<any>window).ethereum) {
             this.web3 = new Web3((<any>window).ethereum);
-            this.injectedMetamask = (<any>window).ethereum;
+            this.injectedWallet = (<any>window).ethereum;
             return true;
         }
         return false;
