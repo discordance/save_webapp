@@ -5,8 +5,9 @@ import { chatService, web3WalletService } from './services';
 
 // All states that defines the current state of the chat bot
 export enum SaveState {
-  Idle, // first time access, no wallet
-  WalletCreation
+  Idle, // nothing in particular
+  OnRampPay
+  
 }
 
 // the Save service implements a state machine
@@ -24,8 +25,8 @@ export class SaveStateService {
 
   // setups the possible transitions
   setupTransitions() {
-    this.stateMachine.from(SaveState.Idle).to(SaveState.WalletCreation);
-    this.stateMachine.from(SaveState.WalletCreation).to(SaveState.Idle);
+    this.stateMachine.from(SaveState.Idle).to(SaveState.OnRampPay);
+    this.stateMachine.from(SaveState.OnRampPay).to(SaveState.Idle);
   }
 
   // for board
@@ -41,9 +42,9 @@ export class SaveStateService {
   // a bot tag was detected, check for action
   checkAction(tag: ActionTags) {
     switch (tag) {
-      case (ActionTags.WalletCreate):
-        this.newState(SaveState.WalletCreation);
-        return;
+      // case (ActionTags.WalletCreate):
+      //   this.newState(SaveState.WalletCreation);
+      //   return;
       case (ActionTags.ClearChat):
         chatService.clearChat();
         return;
@@ -52,7 +53,10 @@ export class SaveStateService {
         return;  
       case (ActionTags.WalletConnect):
         web3WalletService.askForConnection();
-        return;                
+        return;  
+      case (ActionTags.OnRampPay):
+        this.newState(SaveState.OnRampPay);
+        return;                        
       default:
         return;  
     }

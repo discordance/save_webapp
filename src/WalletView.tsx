@@ -12,7 +12,7 @@ function WalletView() {
     });
 
     if (currentAccount !== '') {
-        return <span className="Wallet-Adress">🔒 {currentAccount}</span>
+        return <span className="Wallet-Adress"><span role="img" aria-label="wallet">🔒</span> {currentAccount}</span>
     }
     return <span className="Wallet-Adress"></span>
 }
