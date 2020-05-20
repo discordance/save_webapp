@@ -2,6 +2,13 @@ import Web3 from 'web3';
 import { chatService } from './services';
 import { Observable } from './observable';
 
+export class CoinsBalances {
+    eth: number = 0;
+    dai: number = 0;
+    usdc: number = 0;
+    usdt: number = 0;
+}
+
 // Web3 Wallet Service
 export class Web3WalletService {
     private web3: Web3 | null = null;
@@ -9,6 +16,9 @@ export class Web3WalletService {
 
     // components can observe account
     readonly currentAccount: Observable<string> = new Observable("");
+
+    // balances
+    readonly coinBalances: Observable<CoinsBalances> = new Observable(new CoinsBalances());
 
     // update the observable account
     async updateWalletAccounts() {
@@ -21,22 +31,28 @@ export class Web3WalletService {
     async checkStableCoinBalance() {
         const account = this.currentAccount.get();
         if (account !== '' && this.web3) {
+
+            const balances = new CoinsBalances();
+
             // check ETH
             let ethBalance = await this.web3.eth.getBalance(account);
             ethBalance = Web3.utils.fromWei(ethBalance, 'ether');
-            console.log('ETH BALANCE', ethBalance);
+            balances.eth = parseFloat(parseFloat(ethBalance).toFixed(4));
 
             // dai
             const daiBalance = await this.checkContractBalance(account, '0x6b175474e89094c44da98b954eedeac495271d0f', 18);
-            console.log('DAI BALANCE', daiBalance);
+            balances.dai = daiBalance ? parseFloat(daiBalance.toFixed(4)) : 0;
 
             // usdc
             const usdcBalance = await this.checkContractBalance(account, '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48', 6);
-            console.log('USDC BALANCE', usdcBalance);
+            balances.usdc = usdcBalance ? parseFloat(usdcBalance.toFixed(4)) : 0;
 
             // usdt
             const usdtBalance = await this.checkContractBalance(account, '0xdac17f958d2ee523a2206206994597c13d831ec7', 6);
-            console.log('USDT BALANCE', usdtBalance);
+            balances.usdt = usdtBalance ? parseFloat(usdtBalance.toFixed(4)) : 0;
+
+            // set
+            this.coinBalances.set(balances);
 
         } else {
             console.log('nope');

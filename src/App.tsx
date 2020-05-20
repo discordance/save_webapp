@@ -13,9 +13,7 @@ function App() {
         <p>
           <span role="img" aria-label="logo">🤵</span> Hello Save
         </p>
-        <p>
-          <WalletView/>
-        </p>
+        <WalletView/>
       </header>
 
       <section className="App-main">
