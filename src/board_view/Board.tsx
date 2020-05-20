@@ -11,8 +11,8 @@ function Transak() {
     return (
       <div className="BoardInner">
         {BoardHeader("Transak Fiat Pay")}
-        <div className="BoardMessage">
-          <p>Unable to find a Wallet</p>
+        <div className="BoardText">
+          <p>Unable to find a Wallet.</p>
         </div>
       </div>
     );

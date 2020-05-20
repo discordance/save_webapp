@@ -7,7 +7,7 @@ export class TransakService {
     initOnRamp(address: string) {
         // set the api
         let transak = new transakSDK({
-            apiKey: 'ae64c581-4b82-4d06-b075-689afcb80e00',
+            apiKey: '9fda6a58-92b1-4fb8-adb1-3764132c6048',
             environment: 'STAGING', // STAGING/PRODUCTION
             defaultCryptoCurrency: 'USDT',
             walletAddress: address, // Your customer's wallet address
