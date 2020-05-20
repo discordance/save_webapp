@@ -8,7 +8,11 @@ function WalletView() {
     const currentAccount = useObservable(web3WalletService.currentAccount);
 
     React.useEffect(() => {
-        web3WalletService.updateWalletAccounts();
+        async function updateAccounts() {
+            await web3WalletService.updateWalletAccounts();
+            await web3WalletService.checkStableCoinBalance();
+        }
+        updateAccounts();
     });
 
     if (currentAccount !== '') {
