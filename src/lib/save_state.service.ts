@@ -7,7 +7,6 @@ import { chatService, web3WalletService } from './services';
 export enum SaveState {
   Idle, // nothing in particular
   OnRampPay
-  
 }
 
 // the Save service implements a state machine
