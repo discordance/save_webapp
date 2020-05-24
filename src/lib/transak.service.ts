@@ -17,7 +17,7 @@ export class TransakService {
     let transak = new transakSDK({
       apiKey: '9fda6a58-92b1-4fb8-adb1-3764132c6048',
       environment: 'STAGING', // STAGING/PRODUCTION
-      defaultCryptoCurrency: 'USDT',
+      defaultCryptoCurrency: 'aDAI',
       walletAddress: address, // Your customer's wallet address
       themeColor: '000000', // App theme color
       fiatCurrency: 'EUR', // INR/GBP
