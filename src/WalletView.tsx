@@ -26,8 +26,8 @@ function WalletView() {
                 <span className="Wallet-Balances">
                     <p className="Token"><img className="Token-Img" src="https://cryptologos.cc/logos/ethereum-eth-logo.svg" />{balances.eth}</p>
                     <p className="Token"><img className="Token-Img" src="https://cryptologos.cc/logos/multi-collateral-dai-dai-logo.svg" />{balances.dai}</p>
-                    <p className="Token"><img className="Token-Img" src="https://cryptologos.cc/logos/usd-coin-usdc-logo.svg" />{balances.usdc}</p>
-                    <p className="Token"><img className="Token-Img" src="https://cryptologos.cc/logos/tether-usdt-logo.svg" />{balances.usdt}</p>
+                    {/* <p className="Token"><img className="Token-Img" src="https://cryptologos.cc/logos/usd-coin-usdc-logo.svg" />{balances.usdc}</p>
+                    <p className="Token"><img className="Token-Img" src="https://cryptologos.cc/logos/tether-usdt-logo.svg" />{balances.usdt}</p> */}
                 </span>
             </div>
         )

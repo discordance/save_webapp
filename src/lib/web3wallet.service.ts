@@ -39,7 +39,7 @@ export class Web3WalletService {
             ethBalance = Web3.utils.fromWei(ethBalance, 'ether');
             balances.eth = parseFloat(parseFloat(ethBalance).toFixed(4));
 
-            // dai
+            // adai
             const daiBalance = await this.checkContractBalance(account, '0x6b175474e89094c44da98b954eedeac495271d0f', 18);
             balances.dai = daiBalance ? parseFloat(daiBalance.toFixed(4)) : 0;
 
@@ -98,7 +98,10 @@ export class Web3WalletService {
     }
 
     private walletDetection(): boolean {
-        if ((<any>window).ethereum) {
+        if(this.web3) {
+            return true;
+        }
+        if ((<any>window).ethereum && !this.web3) {
             this.web3 = new Web3((<any>window).ethereum);
             this.injectedWallet = (<any>window).ethereum;
             return true;

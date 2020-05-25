@@ -16,8 +16,8 @@ export class TransakService {
     // set the api
     let transak = new transakSDK({
       apiKey: '9fda6a58-92b1-4fb8-adb1-3764132c6048',
-      environment: 'STAGING', // STAGING/PRODUCTION
-      defaultCryptoCurrency: 'aDAI',
+      environment: 'PRODUCTION', // STAGING/PRODUCTION
+      defaultCryptoCurrency: 'DAI',
       walletAddress: address, // Your customer's wallet address
       themeColor: '000000', // App theme color
       fiatCurrency: 'EUR', // INR/GBP
@@ -43,6 +43,12 @@ export class TransakService {
     // TRANSAK_ORDER_CANCELLED: 'TRANSAK_ORDER_CANCELLED',
     // TRANSAK_ORDER_FAILED: 'TRANSAK_ORDER_FAILED',
     // TRANSAK_ORDER_SUCCESSFUL: 'TRANSAK_ORDER_SUCCESSFUL'
+
+    // This will trigger when the user marks payment is made.
+    transak.on(transak.EVENTS.TRANSAK_ORDER_FAILED, () => {
+      console.log('Order Failed');
+      transak.close();
+    });
 
     // This will trigger when the user marks payment is made.
     transak.on(transak.EVENTS.TRANSAK_ORDER_SUCCESSFUL, (orderData) => {
